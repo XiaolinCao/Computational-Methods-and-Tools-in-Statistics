@@ -1,0 +1,19 @@
+#!/bin/env bash
+
+## Question 2
+## Author: Xiaolin Cao (UM ID: 62251943)
+## This shell script accepts arguments "file" and "expression"
+## and extracts the columns with their names matching the "expression"
+## from the "file". Then, it outputs the results to a new file.
+
+
+## file and expression are two arguments specified by the user
+file="$1"
+expression="$2"
+
+## extracts the columns whose names match with the expression 
+## and outputs them to a new file specified by the user
+cols=$(< $file head -n 1 | tr ',' '\n' |
+grep -E "DOEID|^BRRWT" -n | cut -d ":" -f 1 | paste -s -d "," -)
+< $file cut -d "," -f $cols 
+

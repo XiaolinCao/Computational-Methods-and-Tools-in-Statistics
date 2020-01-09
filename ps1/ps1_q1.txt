@@ -1,0 +1,31 @@
+#!/bin/env bash
+
+## Question 1
+## Author: Xiaolin Cao (UM ID: 62251943)
+## This shell script manipulates the RECS dataset by
+## extracting relevant column names and outputing the
+## corresponding columns to a new csv file.
+
+
+##a
+#### file with the RECS data
+file=./recs2015_public_v4.csv
+#echo $file
+
+##b
+#### extract the header row of the RECS data and write the results to recs_names.txt
+< $file head -n 1 | tr ',' '\n' > recs_names.txt
+
+##c
+#### return the column positions for id and replicate weights as a string
+grep -E "DOEID|^BRRWT" -n recs_names.txt | cut -d ":" -f 1 | paste -s -d "," -
+
+##d
+#### extract id and replicate weights columns in recs dataset and output them as recs_weights.csv
+cols=$(grep -E "DOEID|^BRRWT" -n recs_names.txt | cut -d ":" -f 1 | paste -s -d "," -)
+< $file cut -d "," -f $cols > recs_weights.csv
+#echo $cols
+
+
+
+
