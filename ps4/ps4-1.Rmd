@@ -1,0 +1,63 @@
+---
+title: "ps4"
+author: "Xiaolin Cao"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(tidyverse)
+library(readxl)
+```
+
+# Question 1
+```{r}
+df1 = read_excel("ps4_q1.xls") %>%
+  rename(curvatures = ...1)
+knitr::kable(df1, caption = "Effects of Different Conditions on Curvatures")
+```
+
+# Question 2
+```{r, warning=FALSE, message=FALSE}
+## use Stata output to form a table
+df2 = read.csv("ps4_q2.csv")
+knitr::kable(df2, caption = "Internet Disparity Between Urban and Rural Areas In 10 Different Divisions")
+```
+
+By looking at the result table, division 9 has the largest disparity between urban and rural areas in terms of the proportions of homes with internet access. Division 9 has the largest upper bound.
+
+# Question 3
+## c
+```{r}
+df3c = matrix(c(1.130136,	1.027747,	1.242726,	0.024121,	0.0053218,	0.0429203,
+                1.109808,	1.009919,	1.219577,	0.0204689, 0.0019269,	0.0390109,
+                1.158033,	1.128201,	1.188654,	0.0316543,	0.0256843,	0.0376244,
+                0.9737323,	0.9648531,	0.9826932, NA, NA, NA,			
+                1.33266,	1.213307,	1.463753,	0.0564991,	0.0380799,	0.0749184,
+                1.093849,	1.060388,	1.128366,	0.0176006,	0.0115375,	0.0236637), 
+                nrow = 6, byrow=TRUE)
+rownames(df3c) = c("1.weekday", "2.winter", "cage", "cage^2", "2.gender", "cpir")
+colnames(df3c) = c("Odds Ratio", "lwr", "upr", "marginal effect", "lwr_marginal_effect", "upr_marginal_effect")
+df3c = round(df3c, digits = 4)
+df3c
+```
+
+## d
+```{r}
+df3d = matrix(c(1.239979,	1.10902,	1.386404,	0.0232385,	0.0111058,	0.0353713,
+                1.077818,	0.9369008,	1.23993,	0.0080304,	-0.0069865,	0.0230472,
+                1.362175,	1.308046,	1.418544,	0.0359009,	0.0309386,	0.0408632,
+                0.9550781,	0.9420468,	0.9682896, NA, NA, NA,
+                1.757915,	1.527092,	2.023627,	0.0605507,	0.0455947,	0.0755066,
+                1.179018,	1.125907,	1.234633,	0.0176414,	0.0127545, 0.0225282),
+                nrow = 6, byrow=TRUE)
+rownames(df3d) = c("1.weekday", "2.winter", "cage", "cage^2", "2.gender", "cpir")
+colnames(df3d) = c("Odds Ratio", "lwr", "upr", "marginal effect", "lwr_marginal_effect", "upr_marginal_effect")
+df3d = round(df3d, digits = 4)
+df3d
+```
+
+Summary: Those two logistic regressions are similar to each other in terms of odds ratio and marginal effects. And the corresponding confidence intervals also overlap. To answer the question: Yes, people in the US are more likely to drink water on a weekday than on a weekend day. The odds ratios for that are 1.130 and 1.240 respectively in the above models. 
