@@ -1,3 +1,3 @@
 # Computational-Methods-and-Tools-in-Statistics
 
-## assignments from class
+Please see the instruction pdf for problem description.
